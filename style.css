@@ -44,3 +44,14 @@ body {
 .freestylers__name {
     margin: 0;
 }
+
+
+.card {
+    width: 250px;
+    height: 60px;
+    margin-top: 50px;
+    border-radius: 2px;
+}
+.dragging {
+    position: fixed;
+}
