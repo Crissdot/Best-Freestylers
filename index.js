@@ -1,7 +1,9 @@
 class DOMHelper {
     static move(el, coords) {
-        el.style.top = coords.y - el.clientHeight + 'px';
-        el.style.left = coords.x - (el.clientWidth / 2) + 'px';
+        if(coords.y - el.clientHeight > 0 || coords.x - (el.clientWidth / 2) > 0) {
+            el.style.top = coords.y - el.clientHeight + 'px';
+            el.style.left = coords.x - (el.clientWidth / 2) + 'px';
+        }
     }
 
     static whereIs(el, pointerCoords) {
@@ -72,6 +74,8 @@ class DragList {
         let el = event.currentTarget;
         event.dataTransfer.setDragImage(this.canvas, 0, 0);
         el.classList.add('dragging');
+        this.finalPosition = 1;
+        this.finalElementHover = el;
 
         this.list.insertBefore(this.fakeElement, el.nextSibling);
     }
