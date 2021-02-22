@@ -34,6 +34,8 @@ class DragList {
         this.buildFakeElement();
 
         this.addDragListeners();
+
+        this.throttledDrag = this.throttle(this.handleDrag, 30);
     }
 
     buildFakeElement() {
@@ -45,25 +47,41 @@ class DragList {
     addDragListeners() {
         this.items.forEach(item => {
             item.addEventListener('dragstart', this.handleDragStart);
-            item.addEventListener('drag', this.handleDrag);
+            item.addEventListener('drag', (event) => {
+                this.throttledDrag(event, event.currentTarget);
+                this.items.forEach(item => this.compareElement(item, event));
+            });
             item.addEventListener('dragend', this.handleDragEnd);
         });
+    }
+
+    throttle(fn, delay) {
+        let timeout = null;
+
+        return (...args) => {
+            if(!timeout) {
+                timeout = setTimeout(() => {
+                    fn(...args);
+                    timeout = null;
+                }, delay);
+            }
+        }
     }
 
     handleDragStart(event) {
         let el = event.currentTarget;
         event.dataTransfer.setDragImage(this.canvas, 0, 0);
         el.classList.add('dragging');
+
+        this.list.insertBefore(this.fakeElement, el.nextSibling);
     }
 
-    handleDrag(event) {
+    handleDrag(event, currentTarget) {
         let mouseCoords = {
             x: event.clientX,
             y: event.clientY,
         };
-        DOMHelper.move(event.currentTarget, mouseCoords);
-
-        this.items.forEach(item => this.compareElement(item, event));
+        DOMHelper.move(currentTarget, mouseCoords);
     }
 
     compareElement(item, event) {
