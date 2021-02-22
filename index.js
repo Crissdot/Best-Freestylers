@@ -31,7 +31,7 @@ class DragList {
         this.handleDrag = this.handleDrag.bind(this);
         this.handleDragEnd = this.handleDragEnd.bind(this);
 
-        this.canvas = document.createElement('canvas');
+        this.canvas = document.createElement('div');
 
         this.buildFakeElement();
 

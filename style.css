@@ -1,20 +1,44 @@
 :root {
-    --color-primary: #020302;
-    --color-secondary: #001800;
-    --color-variation: #00D93E;
+    --color-primary: #560D7F;
+    --color-secondary: #A134BE;
+    --color-variation: #FAC100;
+    --color-dark: #020302;
     --color-light: #D1D0CB;
 }
 body {
+    width: 100vw;
+    height: 100vh;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: var(--color-primary);
+    background-color: var(--color-dark);
     font-family: Arial, Helvetica, sans-serif;
+}
+body::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://wallpaperaccess.com/full/312049.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(100%);
+    opacity: 0.05;
 }
 
 
+.freestylers {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
 .freestylers ul {
     display: inline-block;
+    padding: 0;
 }
 .freestylers__card {
     display: flex;
@@ -22,13 +46,14 @@ body {
     align-items: center;
     width: 250px;
     height: 60px;
-    margin-top: 50px;
     border-radius: 2px;
-    border: 2px solid var(--color-variation);
-    box-shadow: 0 0 15px var(--color-variation);;
-    background-color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
+    margin-top: 20px;
+    box-shadow: 0 0 15px var(--color-secondary);;
+    background-color: var(--color-primary);
     color: var(--color-light);
     list-style-type: none;
+    cursor: pointer;
 }
 .freestylers__name {
     margin: 0;
@@ -38,9 +63,9 @@ body {
 .card {
     width: 250px;
     height: 60px;
-    margin-top: 50px;
+    margin-top: 20px;
     border-radius: 2px;
-    border: 2px solid var(--color-variation);
+    border: 2px solid var(--color-secondary);
 }
 .dragging {
     position: fixed;
